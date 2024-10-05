@@ -4,6 +4,9 @@
 #include <windows.h>
 #include <time.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <wchar.h>
+#include <wctype.h>
 
 int zadanie1() {
     int resjum, count = 1;
@@ -61,6 +64,36 @@ int zadanie1() {
 }
 
 
+int zadanie2() {
+    int word_count = 0;
+    int num_count = 0;
+    int in_word = 0;
+    int in_num = 0;
+
+    wchar_t c;
+    _flushall();
+    while ((c = getwchar()) != L'\n') {
+        if (iswspace(c)) {
+            in_word = 0;
+            in_num = 0;
+        } else if (iswalpha(c)) {
+            if (!in_word) {
+                word_count++;
+                in_word = 1;
+            }
+        } else if (iswdigit(c)) {
+            if (!in_num) {
+                num_count++;
+                in_num = 1;
+            }
+        }
+    }
+
+    printf("Количество слов: %d\n", word_count);
+    printf("Количество чисел: %d", num_count);
+
+}
+
 
 int main() {
     SetConsoleOutputCP(CP_UTF8);
@@ -70,5 +103,8 @@ int main() {
 
     switch(number) {
         case 1: zadanie1(); break;
+        case 2: zadanie2(); break;
     }
 }
+
+
