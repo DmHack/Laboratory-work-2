@@ -72,7 +72,7 @@ int zadanie2() {
 
     wchar_t c;
     _flushall();
-    while ((c = getwchar()) != L'\n') {
+    while ((c = getwchar()) != '\n') {
         if (iswspace(c)) {
             in_word = 0;
             in_num = 0;
